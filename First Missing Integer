@@ -1,0 +1,27 @@
+public class Solution {
+    public int firstMissingPositive(ArrayList<Integer> A) {
+        int n = A.size();
+        int index = 0;
+        while (index < n) {
+            if (A.get(index) == (index + 1) || A.get(index) <= 0 || A.get(index) > n) {
+        index++;
+        continue;
+      }
+      int index1 = index;
+      int index2 = A.get(index) - 1;
+      if (A.get(index2) != A.get(index1)) {
+        int temp = A.get(index1);
+        A.set(index1, A.get(index2));
+        A.set(index2, temp);
+      }
+      else {
+        index++;
+      }
+    }
+    index = 0;
+    while (index < n && A.get(index) == index + 1) {
+      index++;
+    }
+    return index + 1;
+  }
+}
