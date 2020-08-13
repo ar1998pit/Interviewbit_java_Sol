@@ -1,0 +1,46 @@
+You are given a read only array of n integers from 1 to n.
+
+Each integer appears exactly once except A which appears twice and B which is missing.
+
+Return A and B.
+
+Note: Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory?
+
+Note that in your output A should precede B.
+
+Example:
+
+Input:[3 1 2 5 3] 
+
+Output:[3, 4] 
+
+A = 3, B = 4 
+
+According to the question, each number exists only once except A which appears twice and B which is missing.
+The numbers in the array lie in the range of 1-N. It would only make sense if we took advantage of this. 
+So, while traversing through the array, we go to the index being represented by the value of the current element minus 1,
+and make the element (at the arrived index) the negative of itself. If we come across an element which is already negative,
+we’ll come to know that the element repeating itself is the index of this negative element plus 1. Now the only task is to find the missing number,
+which can be found out by traversing through the array one more time and identifying a positive element, whose index plus 1 will be B.
+
+
+public class Solution {
+    // DO NOT MODIFY THE ARGUMENTS WITH "final" PREFIX. IT IS READ ONLY
+   public int[] repeatedNumber(final int[] A) {
+       int arr[]= new int[2];
+       for(int i = 0; i < A.length; i++) {
+           int index= Math.abs(A[i])-1;
+           if(A[index] < 0)
+           arr[0]= index+1;
+           else
+           A[index]= -1*A[index];
+           
+       }
+       for(int i= 0; i < A.length; i++)
+       if(A[i] > 0)
+       arr[1]= i+1;
+       
+    return arr;
+       
+   }
+}
