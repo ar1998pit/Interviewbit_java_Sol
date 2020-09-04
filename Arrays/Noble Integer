@@ -8,7 +8,7 @@ public class Solution {
       while (idx < n && A.get(idx) == num) {
         idx++;
       }
-      if (num == A.size() - idx) {
+      if (num == n - idx) {
         return 1;
       }
     }
