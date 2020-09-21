@@ -1,0 +1,21 @@
+https://www.interviewbit.com/problems/implement-strstr/
+
+public class Solution {
+    // DO NOT MODIFY THE LIST. IT IS READ ONLY
+    public int strStr(final String A, final String B) {
+        int l1 = A.length();
+        int l2 = B.length();
+        
+        if (l2>l1){
+            return -1;
+        }
+        for (int i = 0; i <= l1 - l2; i++) {
+            if (A.substring(i, i + l2).equals(B)) {
+                return i;
+                
+            }
+            
+        }
+        return -1;
+    }
+}
