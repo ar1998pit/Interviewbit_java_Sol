@@ -1,0 +1,98 @@
+https://www.interviewbit.com/problems/roman-to-integer/
+
+public class Solution {
+    public int romanToInt(String s) {
+         if(s == null){
+        return 0;
+    }
+    
+    int length = s.length();
+    int sum = 0;
+    int pre = 0;
+    
+    for(int i = length-1;i>=0;i--){
+        int cur = romanTable(s.charAt(i));
+        
+        if(i == length - 1){
+            sum = sum + cur;
+        }else{
+           if(cur < pre){
+               sum = sum - cur;
+           }else{
+               sum = sum + cur;
+           }
+        }
+        pre = cur;
+    }
+    
+    return sum;
+}
+
+public int romanTable(char c){
+    int num = 0;
+    switch(c){
+        case 'I':
+            num = 1;
+            break;
+        case 'V':
+            num = 5;
+            break;
+         case 'X':
+            num = 10;
+            break;
+         case 'L':
+             num = 50;
+             break;
+         case 'C':
+             num = 100;
+             break;
+         case 'D':
+             num = 500;
+             break;
+         case 'M':
+             num = 1000;
+             break;
+         default:
+             num = 0;
+             break;
+    }
+    return num;
+    }
+}
+
+____________________________________________________________________________
+____________________________________________________________________________
+
+USING HASH MAP
+
+public class Solution {
+    public int romanToInt(String A) {
+        HashMap<Character,Integer> map=new HashMap<Character,Integer>();
+        map.put('I',1);
+        map.put('V',5);
+        map.put('X',10);
+        map.put('L',50);
+        map.put('C',100);
+        map.put('D',500);map.put('M',1000);
+        int res=0;
+        int n=A.length();
+        if(n==1)
+        return map.get(A.charAt(0));
+        
+        for(int i=0;i<n-1;i++)
+        {
+        char x=A.charAt(i);
+        char y=A.charAt(i+1);
+        if(map.get(y)>map.get(x))
+        {
+            res+=map.get(y)-map.get(x);
+            i++;
+        }
+        else
+        res+=map.get(x);
+    }
+    if(map.get(A.charAt(n-2))>=map.get(A.charAt(n-1)))
+    res+=map.get(A.charAt(n-1));
+    return res;
+}
+}
